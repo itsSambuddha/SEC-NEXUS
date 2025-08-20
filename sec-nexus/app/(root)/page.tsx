@@ -27,7 +27,7 @@ export default function Home() {
 
             {/* Hero Image - Right Column */}
             <div className="flex justify-center items-center">
-              <div className="w-full max-w-md lg:max-w-lg aspect-square bg-gradient-to-br from-blue-400 to-purple-500 rounded-2xl flex items-center justify-center shadow-xl">
+              <div className="w-full max-w-md lg:max-w-lg aspect-square bg-gradient-to-br from-white-400 to-gray-500 rounded-2xl flex items-center justify-center shadow-xl">
                 <div className="text-white text-center p-8">
                   <div className="text-6xl mb-4"></div>
                   <h3 className="text-2xl font-bold mb-2">SEC NEXUS</h3>
