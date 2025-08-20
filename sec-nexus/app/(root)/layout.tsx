@@ -1,11 +1,13 @@
-import React from 'react'
-
-const layout = () => {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <div>
-      
+    <div className="flex h-screen flex-col">
+      {/* <Header /> */}
+      <main className="flex-1">{children}</main>
+      {/* <Footer /> */}
     </div>
   )
 }
-
-export default layout
