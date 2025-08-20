@@ -1,47 +1,71 @@
 import Image from "next/image";
-
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <>
-      {/* Hero Section */}
-      <section className="bg-primary-50 bg-dotted-pattern bg-contain py-5 md:py-10">
-        <div className="wrapper grid grid-cols-1 gap-5 md:grid-cols-2 2xl:grid-cols-0">
-          {/* This section is exclusive for the text outlook of the website. AKA Hero section  */}
-          <div className="flex flex-col justify-centre gap-8">
-            <h1 className="h1-bold">Welcome to SEC NEXUS</h1>
-            <p className="p-regular-20 md:p-regular-24"> Your One Stop Destination  To All Event and Activities management  within St. Edmund's College
-            </p>
-            <p> i would change these later. this is just a prototype so to say</p>
-            <Button size="lg" asChild className="button w-full sm:w-fit">
-              <Link href="#events"> 
-                Get Started
-              </Link>
-            </Button>
+      {/* Hero Section - Fixed with working classes */}
+      <section className="bg-gradient-to-br from-blue-50 to-indigo-100 py-12 md:py-20">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[60vh]">
+            {/* Hero Text - Left Column */}
+            <div className="flex flex-col justify-center space-y-6 text-center lg:text-left">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                Welcome to SEC NEXUS
+              </h1>
+              <p className="text-lg md:text-xl text-gray-700 max-w-lg mx-auto lg:mx-0">
+                Your One Stop Destination To All Event and Activities Management within St. Edmund's College
+              </p>
+              {/* <p className="text-sm text-gray-600">
+                Discover amazing events and activities tailored for you
+              </p> */}
+              <Button size="lg" asChild className="w-full sm:w-fit mx-auto lg:mx-0">
+                <Link href="#events">Get Started</Link>
+              </Button>
+            </div>
+
+            {/* Hero Image - Right Column */}
+            <div className="flex justify-center items-center">
+              <div className="w-full max-w-md lg:max-w-lg aspect-square bg-gradient-to-br from-blue-400 to-purple-500 rounded-2xl flex items-center justify-center shadow-xl">
+                <div className="text-white text-center p-8">
+                  <div className="text-6xl mb-4"></div>
+                  <h3 className="text-2xl font-bold mb-2">SEC NEXUS</h3>
+                  <p className="text-lg">PLACEHOLDER FOR HERO IMAGE</p>
+                </div>
+              </div>
+            </div>
           </div>
-          {/* This section is exclusive for the main image of the landing page. AKA Hero image */}
-          <Image
-            src="/assets/images/hero.png"
-            alt="Hero Image"
-            width={1000}
-            height={1000}
-            className="max-h-[70vh] object-contain object-centre 2xl:max-h-[50vh]"
-          />
         </div>
       </section>
 
-      <section id="events" className="wrapper my-8 flex flex-col gap-10 md:gap-12">
-        {/* this section starts with the main content */}
-        <h2 className="h2-bold">IDK what to fill here as of yet. <br/> shall do it soon</h2>
+      {/* Events Section - Fixed Layout */}
+      <section id="events" className="py-16 bg-white">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Upcoming Events
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Discover amazing events and activities happening at St. Edmund's College
+            </p>
+          </div>
 
-        <div className="flex w-full flex-col gap-6 md:flex-row">
-          Search 
-          Category
-          Departments 
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+              <h3 className="text-xl font-semibold mb-2">Search Events</h3>
+              <p className="text-gray-600">Find events by keywords, dates, or categories</p>
+            </div>
+            <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+              <h3 className="text-xl font-semibold mb-2">Browse Categories</h3>
+              <p className="text-gray-600">Explore events by department or interest</p>
+            </div>
+            <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+              <h3 className="text-xl font-semibold mb-2">Filter Departments</h3>
+              <p className="text-gray-600">View events specific to your department</p>
+            </div>
+          </div>
         </div>
-
       </section>
     </>
   );
