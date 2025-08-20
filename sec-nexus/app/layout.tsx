@@ -4,17 +4,18 @@ import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 
 const poppins = Poppins({
-  variable: "--font-poppins",
   subsets: ["latin"],
-  weight:['400', '500', '600', '700']
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-poppins",
+  display: "swap", // better rendering, avoids FOIT
 });
 
 export const metadata: Metadata = {
   title: "SEC NEXUS",
   description: "Fixed draft of SEC NEXUS",
-  icons:{
-    icon:"/assets/images/logo.svg"
-  }
+  icons: {
+    icon: "/assets/images/logo.svg",
+  },
 };
 
 export default function RootLayout({
@@ -24,10 +25,8 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body
-          className={`${poppins.variable} antialiased`}
-        >
+      <html lang="en" className={poppins.variable}>
+        <body className="font-sans antialiased">
           {children}
         </body>
       </html>

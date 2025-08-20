@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-import { withUt } from 'uploadthing/tw';
+import { withUt } from 'uploadthing/tw'
+import colors from 'tailwindcss/colors'
 
 module.exports = withUt({
   darkMode: 'class',
@@ -19,9 +20,12 @@ module.exports = withUt({
     },
     extend: {
       colors: {
+        // Use Slate as the default gray scale
+        gray: colors.slate,
+
         primary: {
           500: '#624CF5',
-          50: ' #F6F8FD',
+          50: '#F6F8FD',
           DEFAULT: '#624CF5',
           foreground: 'hsl(var(--primary-foreground))',
         },
@@ -30,17 +34,20 @@ module.exports = withUt({
         },
 
         grey: {
-          600: '#545454', // Subdued - color name in figma
+          600: '#545454',
           500: '#757575',
-          400: '#AFAFAF', // Disabled - color name in figma
-          50: '#F6F6F6', // White Grey - color name in figma
+          400: '#AFAFAF',
+          50: '#F6F6F6',
         },
+
         black: '#000000',
         white: '#FFFFFF',
+
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         foreground: 'hsl(var(--foreground))',
+
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))',
@@ -95,4 +102,4 @@ module.exports = withUt({
     },
   },
   plugins: [require('tailwindcss-animate')],
-});
+})
