@@ -14,6 +14,7 @@ export interface IEvent extends Document {
   category: { _id: string; name: string }; // Ref to Category
   status: string; // "pending", "approved", "rejected"
   isCR: boolean; // true if registrant is Class Representative
+  department?: { _id: string; name: string }; // Ref to Department (optional)
 }
 
 const EventSchema = new Schema({
@@ -27,6 +28,7 @@ const EventSchema = new Schema({
     endDateTime: { type: Date, required: true },
     url: { type: String },
     category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
+    department: { type: Schema.Types.ObjectId, ref: 'Department', required: false },
     status: { type: String, default: "pending", enum: ["pending", "approved", "rejected"] },
     isCR: { type: Boolean, default: false }
 });
