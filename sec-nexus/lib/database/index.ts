@@ -20,7 +20,7 @@ export const connectToDatabase = async () => {
     if (!cached.promise) {
         // if the cached promise is not defined, we create a new connection promise
         cached.promise = mongoose.connect(MONGODB_URI, {
-            dbName: 'NEXUS1',
+            dbName: 'SEC-NEXUS',
             bufferCommands: false
         });
     }
