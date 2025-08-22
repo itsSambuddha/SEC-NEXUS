@@ -3,7 +3,7 @@ import { model, models, Schema, Types } from "mongoose";
 export interface IEvent extends Document {
     _id: string;
   title: string;
-  description: string;
+  description?: string;
   venue?: string;
   organizer: { _id: string; firstname: string, lastname:string }; // Ref to Admin
   createdAt: Date;
@@ -19,7 +19,7 @@ export interface IEvent extends Document {
 
 const EventSchema = new Schema({
     title: { type: String, required: true },
-    description: { type: String, required: true },
+    description: { type: String },
     venue: { type: String },
     organizer: { type: Schema.Types.ObjectId, ref:'user', required: true },
     createdAt: { type: Date, default: Date.now },

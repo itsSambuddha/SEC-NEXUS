@@ -13,19 +13,18 @@ export async function POST(req: NextRequest) {
     const eventType = evt.type
 
     if(eventType === 'user.created') {
-      const { email_addresses, image_url, first_name, last_name, username } = evt.data;
+      const { id, email_addresses, image_url, first_name, last_name, username } = evt.data;
       
       // Handle user.created event
       const user = {
-        clerkId: id || '',
+        clerkId: id,
         email: email_addresses?.[0]?.email_address || '',
         firstName: first_name || '',
         lastName: last_name || '',
         username: username || '',
         photo: image_url || ''
       }
-      // in the above object const user we have empty fields as we need to ensure all fields are populated before creating the user. Also because the CreateUser params type requires all fields to be strings but the webhook data might have null values for some fields, therefore we need to handle that accordingly.
-
+      
       const newUser = await createUser(user);
       
       if(newUser) {
@@ -61,7 +60,7 @@ export async function POST(req: NextRequest) {
 
     const deletedUser = await deleteUser(id!)
 
-    return NextResponse.json({ message: 'Sucess', user: deletedUser })
+    return NextResponse.json({ message: 'Success', user: deletedUser })
   }
 
     return new Response('Webhook received', { status: 200 })
