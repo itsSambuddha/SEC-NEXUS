@@ -4,7 +4,7 @@ import { Query, FilterQuery } from "mongoose";
 import { connectToDatabase } from "../database";
 import User from "../database/models/user.model";
 import Event, { IEvent } from "../database/models/event.model";
-import { CreateEventParams, UpdateEventParams, DeleteEventParams, GetAllEventsParams, GetEventsByUserParams, GetRelatedEventsByCategoryParams, GetRelatedEventsByDepartmentParams } from "../types"
+import { CreateEventParams, UpdateEventParams, DeleteEventParams, GetAllEventsParams, GetEventsByUserParams, GetRelatedEventsByCategoryParams, GetRelatedEventsByDepartmentParams, GetRelatedEventsByClubParams } from "../types"
 import { handleError } from "../utils"
 import Category from "../database/models/category.model";
 import Department from "../database/models/department.model";
@@ -38,11 +38,15 @@ export const createEvent = async ({event, userId}:
             throw new Error("Organizer not found");
         }
 
+        if (!event.categoryId) {
+            throw new Error("Category is required");
+        }
+
         const eventData = {
             ...event,
             category: event.categoryId,
-            department: event.departmentId,
-            club: event.clubId,
+            department: event.departmentId || null,
+            club: event.clubId || null,
             clubRole: event.clubRole,
             organizer: organizer._id
         };
@@ -192,7 +196,7 @@ export async function getRelatedEventsByCategory({
   }
 }
 
-
+//GET RELATED EVENTS BY DEPARTMENT FILTER
 export async function getRelatedEventsByDepartment({
   departmentId,
   eventId,
@@ -204,6 +208,35 @@ export async function getRelatedEventsByDepartment({
 
     const skipAmount = (Number(page) - 1) * limit
     const conditions = { $and: [{ department: departmentId }, { _id: { $ne: eventId } }] }
+
+    const eventsQuery = Event.find(conditions)
+      .sort({ createdAt: 'desc' })
+      .skip(skipAmount)
+      .limit(limit)
+
+    const events = await populateEvent(eventsQuery)
+    const eventsCount = await Event.countDocuments(conditions)
+
+    return { data: JSON.parse(JSON.stringify(events)), totalPages: Math.ceil(eventsCount / limit) }
+  } catch (error) {
+    handleError(error)
+  }
+}
+
+
+// GET RELATED EVENTS BY CLUB FILTER
+
+export async function GetRelatedEventsByClub({
+  clubId,
+  eventId,
+  limit = 3,
+  page = 1,
+}: GetRelatedEventsByClubParams) {
+  try {
+    await connectToDatabase()
+
+    const skipAmount = (Number(page) - 1) * limit
+    const conditions = { $and: [{ club: clubId }, { _id: { $ne: eventId } }] }
 
     const eventsQuery = Event.find(conditions)
       .sort({ createdAt: 'desc' })
@@ -238,13 +271,17 @@ export const updateEvent = async ({ userId, event, path }: UpdateEventParams) =>
       throw new Error("Unauthorized");
     }
 
+    if (!event.categoryId) {
+        throw new Error("Category is required");
+    }
+
     const updatedEvent = await Event.findByIdAndUpdate(
       event._id,
       {
         ...event,
         category: event.categoryId,
-        department: event.departmentId,
-        club: event.clubId,
+        department: event.departmentId || null,
+        club: event.clubId || null,
         clubRole: event.clubRole,
       },
       { new: true }

@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '@/components/shared/Header'
-import { getEventById, getRelatedEventsByCategory, getRelatedEventsByDepartment } from '@/lib/actions/event.actions';
+import { getEventById, getRelatedEventsByCategory, getRelatedEventsByDepartment, GetRelatedEventsByClub } from '@/lib/actions/event.actions';
 import Image from 'next/image';
 import { formatDateTime } from '@/lib/utils';
 import Collection from '@/components/shared/Collection';
@@ -12,24 +12,44 @@ const EventDetails = async ({params, searchParams}: SearchParamProps) => {
 
   console.log('Event imageUrl:', event.imageUrl);
 
-  const [relatedEventsByCategory, relatedEventsByDepartment] = await Promise.all([
-    getRelatedEventsByCategory({
-      categoryId: event.category._id,
-      eventId: event._id,
-      page: searchParams.page as string
-    }),
-    getRelatedEventsByDepartment({
-      departmentId: event.department._id,
-      eventId: event._id,
-      page: searchParams.page as string
-    })
-  ])
+  const relatedEventsByCategoryPromise = getRelatedEventsByCategory({
+    categoryId: event.category._id,
+    eventId: event._id,
+    page: searchParams.page as string,
+  });
+
+  const relatedEventsByDepartmentPromise = event.department
+    ? getRelatedEventsByDepartment({
+        departmentId: event.department._id,
+        eventId: event._id,
+        page: searchParams.page as string,
+      })
+    : Promise.resolve(null);
+
+  const relatedEventsByClubPromise = event.club
+    ? GetRelatedEventsByClub({
+        clubId: event.club._id,
+        eventId: event._id,
+        page: searchParams.page as string,
+      })
+    : Promise.resolve(null);
+
+  const [
+    relatedEventsByCategory,
+    relatedEventsByDepartment,
+    relatedEventsByClub,
+  ] = await Promise.all([
+    relatedEventsByCategoryPromise,
+    relatedEventsByDepartmentPromise,
+    relatedEventsByClubPromise,
+  ]);
 
   // Combine and deduplicate related events
   const allRelatedEvents = [
     ...(relatedEventsByCategory?.data || []),
-    ...(relatedEventsByDepartment?.data || [])
-  ]
+    ...(relatedEventsByDepartment?.data || []),
+    ...(relatedEventsByClub?.data || []),
+  ];
 
   // Remove duplicates based on event ID
   const uniqueRelatedEvents = allRelatedEvents.filter((event, index, self) =>
@@ -65,7 +85,12 @@ const EventDetails = async ({params, searchParams}: SearchParamProps) => {
               <div className='flex flex-col gap-4 sm:flex-row sm:items-center'>
               <div className='flex gap-3'>
                 <p className='p-bold-20 rounded-full bg-gray-500/10 px-6 py-3 text-blue-700'>
-                  {event.isCR ? `This event is organized by the CR of ${event.department?.name}` : 'This event is not organized by any CR'}
+                  {event.club
+                    ? `This event is created by ${event.clubRole} of ${event.club.name}`
+                    : (event.isCR 
+                        ? `This event is organized by the CR of ${event.department?.name}` 
+                        : 'This event is not organized by any CR')
+                  }
                 </p>
                 <p className='p-medium-16 rounded-full bg-gray-500/10 px-4 py-5 text-gray-600'>
                 {event.category.name}

@@ -72,7 +72,10 @@ const Card = async ({ event }: CardProps) => {
 
         <div className="flex gap-10">
           <span className="p-semibold-14 text-sm w-min rounded-xl bg-blue-300 px-15 py-1 text-gray-800 shadow-sm">
-            Organized by {event.department?.name} Department
+            {event.club 
+              ? `Organized by ${event.clubRole} of ${event.club.name}`
+              : `Organized by ${event.department?.name} Department`
+            }
           </span>
           <span className="p-semibold-14 text-sm flex w-min rounded-full bg-gray-400 px-3 py-0.5 items-center justify-center text-gray-800 shadow-sm">
             {event.category?.name}

@@ -86,6 +86,14 @@ export type GetRelatedEventsByDepartmentParams = {
   page: number | string
 }
 
+export type GetRelatedEventsByClubParams={
+  clubId:string
+  eventId: string
+  limit?: number
+  page: number | string
+
+}
+
 export type Event = {
   _id: string
   title: string
