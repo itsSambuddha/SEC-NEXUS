@@ -54,6 +54,9 @@ export default async function Home({searchParams}: SearchParamProps) {
                 <Button size="lg" asChild className="w-full sm:w-fit mx-auto lg:mx-0">
                   <Link href="#events">Get Started</Link>
                 </Button>
+                <Button size="lg" asChild className="w-full sm:w-fit mx-auto lg:mx-0">
+                  <Link href="https://sec.edu.in/">Navigate to the College Website</Link>
+                </Button>
               </div>
 
               {/* Hero Image - Right Column */}
