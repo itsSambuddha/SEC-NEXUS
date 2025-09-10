@@ -27,7 +27,7 @@ const populateEvent = async <T>(query: Query<T, HydratedDocument<IEvent>>): Prom
         .populate({
             path: "organizer",
             model: User,
-            select: "_id firstName lastName",
+            select: "_id firstName lastName clerkId",
         })
         .populate({ path: "category", model: Category, select: "_id name" })
         .populate({
