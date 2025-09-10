@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-SEC-NEXUS is a robust and scalable event management platform meticulously designed for educational institutions, specifically catering to the needs of the SEC (likely a college or university). This application streamlines the entire event lifecycle, from creation and promotion to user registration and administration. It provides a centralized, intuitive system for managing diverse events, fostering community engagement, and enhancing organizational efficiency within the academic environment.
+SEC-NEXUS is a robust and scalable event management platform meticulously designed for educational institutions, specifically catering to the needs of St. Edmund's College Shillong. This application streamlines the entire event lifecycle, from creation and promotion to user registration and administration. It provides a centralized, intuitive system for managing diverse events, fostering community engagement, and enhancing organizational efficiency within the academic environment.
 
 ## Live Demo
 
