@@ -105,7 +105,7 @@ Upon launching the application, users can:
 *   **Explore Events:** Browse a comprehensive list of upcoming and past events.
 *   **Filter and Search:** Utilize the advanced filtering options (by category, club, department) and search functionality to quickly find specific events of interest.
 *   **Event Details:** Click on any event to view detailed information, including descriptions, schedules, locations, and associated media.
-*   **Administrator Functions:** Users with administrative privileges can access a dedicated dashboard to manage users, create/edit/delete events, and configure system settings.
+*   **Administrator Functions:** Users with administrative privileges can access a dedicated dashboard to approve/reject/delete events.
 
 ## Project Structure
 
@@ -139,7 +139,7 @@ sec-nexus/
 
 ## Contributing
 
-We welcome contributions to SEC-NEXUS! If you'd like to contribute, please follow these steps:
+I welcome contributions to SEC-NEXUS! If you'd like to contribute, please follow these steps:
 
 1.  Fork the repository.
 2.  Create a new branch for your feature or bug fix.
