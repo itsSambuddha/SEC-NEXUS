@@ -7,14 +7,12 @@ import { updateEvent } from '@/lib/actions/event.actions';
 import { deleteEvent } from '@/lib/actions/event.actions';
 import { Event } from '@/lib/types';
 import { Button } from '@/components/ui/button';
-import Card from '@/components/shared/Card';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/shared/Header';
 import { Trash2 } from 'lucide-react';
 
 const AdminDashboard = () => {
   const { user } = useUser();
-  const router = useRouter();
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
 

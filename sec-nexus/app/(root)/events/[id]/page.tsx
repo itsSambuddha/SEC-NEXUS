@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '@/components/shared/Header'
-import { getEventById, getRelatedEventsByCategory, getRelatedEventsByDepartment, GetRelatedEventsByClub } from '@/lib/actions/event.actions';
+import { getEventById, getRelatedEventsByCategory, getRelatedEventsByDepartment, getRelatedEventsByClub } from '@/lib/actions/event.actions';
 import Image from 'next/image';
 import { formatDateTime } from '@/lib/utils';
 import Collection from '@/components/shared/Collection';
@@ -27,7 +27,7 @@ const EventDetails = async ({params, searchParams}: SearchParamProps) => {
     : Promise.resolve(null);
 
   const relatedEventsByClubPromise = event.club
-    ? GetRelatedEventsByClub({
+    ? getRelatedEventsByClub({
         clubId: event.club._id,
         eventId: event._id,
         page: searchParams.page as string,
@@ -141,12 +141,13 @@ const EventDetails = async ({params, searchParams}: SearchParamProps) => {
             </div>
 
             <div className='flex flex-col gap-2'>
-              <p className='p-bold-20 text-gray-700'>
+              <p className='p-bold-20 text-gray-700 text-2xl'>
                 About the Event
               </p>
               <p className='p-medium-16 text-gray-600'>
                 {event.description}
               </p>
+              Click the Link below to be redirected to the Google Form of {event.title}
               <a href={event.url} target="_blank" rel="noopener noreferrer" className='p-medium-16 lg:p-regular-18 truncate text-blue-600 underline'>
                 {event.url}
               </a>
@@ -156,7 +157,7 @@ const EventDetails = async ({params, searchParams}: SearchParamProps) => {
         </section>
 {/* EVENTS FROM THE SAME CATEGORY AND DEPARTMENTS */}
         <section className='wrapper my-8 flex flex-col gap-8 mdd:gap-12'>
-        <h2 className='h2-bold'> Related Events</h2> 
+        <h2 className='h2-bold text-3xl font-bold'> Related Events</h2> 
           <Collection
             data={uniqueRelatedEvents}
             emptyTitle="No Events Found"

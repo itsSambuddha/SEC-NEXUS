@@ -6,13 +6,27 @@ import Footer from "@/components/shared/Footer";
 import Collection from "@/components/shared/Collection";
 import { getAllEvents } from "@/lib/actions/event.actions";
 
-export default async function Home() {
+import { SearchParamProps } from "@/lib/types";
+import Search from "@/components/shared/Search";
+import CategoryFilter from "@/components/shared/CategoryFilter";
+import DepartmentFilter from "@/components/shared/DepartmentFilter";
+import ClubFilter from "@/components/shared/ClubFilter";
 
-    const events=await getAllEvents({
-      query:'',
-      category: '',
-      department: '',
-      page: 1,
+
+
+export default async function Home({searchParams}: SearchParamProps) { 
+  const page =Number (searchParams?.page) || 1;
+  const searchText =(searchParams?.query as string) || '';
+  const category = (searchParams?.category as string) || '';
+  const department = (searchParams?.department as string) || '';
+  const club = (searchParams?.club as string) || '';
+
+    const events=await getAllEvents({ 
+      query:searchText,
+      category,
+      department,
+      club,
+      page,
       limit: 6,
     });
 
@@ -39,10 +53,6 @@ export default async function Home() {
                 </p> */}
                 <Button size="lg" asChild className="w-full sm:w-fit mx-auto lg:mx-0">
                   <Link href="#events">Get Started</Link>
-                </Button>
-
-                <Button size="lg" asChild className="w-full sm:w-fit mx-auto lg:mx-0">
-                  <Link href="https://sec.edu.in/">Navigate to the College Website</Link>
                 </Button>
               </div>
 
@@ -71,32 +81,26 @@ export default async function Home() {
                 Discover amazing events and activities happening at St. Edmund&apos;s College
               </p>
             </div>
-
-            {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
-                <h3 className="text-xl font-semibold mb-2">Search Events</h3>
-                <p className="text-gray-600">Find events by keywords, dates, or categories</p>
-              </div>
-              <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
-                <h3 className="text-xl font-semibold mb-2">Browse Categories</h3>
-                <p className="text-gray-600">Explore events by department or interest</p>
-              </div>
-              <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
-                <h3 className="text-xl font-semibold mb-2">Filter Departments</h3>
-                <p className="text-gray-600">View events specific to your department</p>
-              </div>
-            </div> */}
-
-
-            <Collection 
-            data={events?.data ? [events.data].flat() : []}
-            emptyTitle="No Events Found"
-            emptyStateSubtext="Try adjusting your filters or check back later."
-            collectionType="All_Events"
-            limit={6}
-            page={1}
-            totalPages={2}
-            />
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <Search/>
+              <CategoryFilter/>
+              <DepartmentFilter/>
+              <ClubFilter/>
+            </div>
+           
+                  <div className="mt-10">
+                    <Collection 
+                        data={events?.data ? [events.data].flat() : []}
+                        emptyTitle="No Events Found"
+                        emptyStateSubtext="Try adjusting your filters or check back later."
+                        collectionType="All_Events"
+                        limit={6}
+                        page={1}
+                        totalPages={2}
+                        />
+                  </div>
+            
+            
             
 
           </div>

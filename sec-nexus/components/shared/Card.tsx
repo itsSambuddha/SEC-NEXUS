@@ -1,4 +1,4 @@
-import { IEvent } from '@/lib/database/models/event.model'
+
 import { Event } from '@/lib/types'
 import { formatDateTime } from '@/lib/utils'
 import { auth } from '@clerk/nextjs/server'

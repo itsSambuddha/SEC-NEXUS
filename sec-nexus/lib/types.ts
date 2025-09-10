@@ -62,6 +62,7 @@ export type GetAllEventsParams = {
   query: string
   category: string
   department?: string
+  club?: string
   limit: number
   page: number
 }

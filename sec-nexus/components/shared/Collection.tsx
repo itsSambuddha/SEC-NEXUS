@@ -1,4 +1,3 @@
-import { IEvent } from '@/lib/database/models/event.model'
 import { Event } from '@/lib/types'
 import React from 'react'
 import Card from './Card'
@@ -18,17 +17,13 @@ const Collection = ({
     data,
     emptyTitle,
     emptyStateSubtext,
-    page: _page,
-    totalPages: _totalPages = 0,
-    collectionType,
-    urlParamName: _urlParamName,
 }: CollectionProps) => {
   return (
     <div>
       {data.length > 0 ? (
         <div className='flex flex-col items-center gap-10'>
 
-              <ul className='grid w-full grid-cols-1 gap-6'>
+              <ul className='grid w-full grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
                 {data.map((event) =>{
 
 
