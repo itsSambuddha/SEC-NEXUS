@@ -1,152 +1,149 @@
-# SEC-NEXUS
+SEC-NEXUS
+Project Overview
+SEC-NEXUS is a robust and scalable event management platform meticulously designed for educational institutions, specifically catering to the needs of St. Edmund's College, Shillong. This application streamlines the entire event lifecycle, from creation and promotion to user registration and administration. It provides a centralized, intuitive system for managing diverse events, fostering community engagement, and enhancing organizational efficiency within the academic environment.
 
-## Project Overview
+**
 
-SEC-NEXUS is a robust and scalable event management platform meticulously designed for educational institutions, specifically catering to the needs of St. Edmund's College Shillong. This application streamlines the entire event lifecycle, from creation and promotion to user registration and administration. It provides a centralized, intuitive system for managing diverse events, fostering community engagement, and enhancing organizational efficiency within the academic environment.
+Live Demo
+Experience the application live at: sec-nexus10.vercel.app
 
-## Live Demo
+Key Features
+Comprehensive User Authentication: Implements secure and efficient user registration and login flows using Clerk, ensuring data integrity and personalized user experiences.
 
-Experience the application live at: [sec-nexus10.vercel.app](https://sec-nexus10.vercel.app)
+Dynamic Event Management: Offers full CRUD (Create, Read, Update, Delete) capabilities for events, allowing administrators and authorized users to manage event details, schedules, and capacities with ease.
 
-## Key Features
+Advanced Filtering System: Events can be meticulously organized and filtered by various attributes, including custom categories, affiliated clubs, and academic departments, facilitating effortless discovery and navigation for users.
 
-*   **Comprehensive User Authentication:** Implements secure and efficient user registration and login flows, ensuring data integrity and personalized user experiences.
-*   **Dynamic Event Management:** Offers full CRUD (Create, Read, Update, Delete) capabilities for events, allowing administrators and authorized users to manage event details, schedules, and capacities with ease.
-*   **Advanced Categorization System:** Events can be meticulously organized and filtered by various attributes, including custom categories, affiliated clubs, and academic departments, facilitating effortless discovery and navigation for users.
-*   **Intuitive Admin Dashboard:** A dedicated, secure administrative interface provides powerful tools for overseeing all aspects of the platform, including user management, event moderation, and content configuration.
-*   **Seamless User Data Synchronization:** Features robust mechanisms for synchronizing user data, enabling integration with existing institutional directories or external data sources to maintain an up-to-date user base.
-*   **Integrated Image Uploads:** Incorporates a streamlined process for uploading and managing event-related imagery, enhancing visual appeal and information richness.
-*   **Responsive and Modern User Interface:** Developed with a mobile-first approach using Next.js and Tailwind CSS, ensuring an optimal and consistent viewing experience across a wide range of devices, from desktops to smartphones.
+Intuitive Admin Dashboard: A dedicated, secure administrative interface provides powerful tools for overseeing all aspects of the platform, including user management and event moderation (approval/rejection).
 
-## Technologies & Stack
+Seamless User Data Synchronization: Features robust mechanisms for synchronizing user data between Clerk and the application's database, maintaining an up-to-date user base.
 
+Integrated Image Uploads: Incorporates a streamlined process for uploading and managing event-related imagery via Uploadthing, enhancing visual appeal and information richness.
+
+Responsive and Modern User Interface: Developed with a mobile-first approach using Next.js and Tailwind CSS, ensuring an optimal and consistent viewing experience across a wide range of devices.
+
+Technologies & Stack
 SEC-NEXUS is built upon a modern and efficient full-stack architecture, leveraging the following key technologies:
 
-*   **Frontend:**
-    *   **Next.js (React Framework):** Chosen for its powerful server-side rendering (SSR) and static site generation (SSG) capabilities, optimizing performance, SEO, and developer experience.
-    *   **React:** The core library for building dynamic and interactive user interfaces.
-    *   **TypeScript:** Provides static typing to enhance code quality, readability, and maintainability, reducing runtime errors.
-    *   **Tailwind CSS:** A highly customizable, utility-first CSS framework that enables rapid UI development and ensures a consistent design system.
-    *   **Shadcn UI:** (Inferred from `components.json`) A collection of re-usable components built with Radix UI and Tailwind CSS, providing accessible and aesthetically pleasing UI elements.
+Frontend:
 
-*   **Backend & Database:**
-    *   **Next.js API Routes:** Utilized for building robust and scalable API endpoints that serve as the backbone for data interaction.
-    *   **MongoDB:** A flexible NoSQL document database, ideal for handling the diverse and evolving data structures of an event management system.
-    *   **Mongoose:** An elegant MongoDB object data modeling (ODM) library for Node.js, simplifying data interaction and validation.
-    *   **NextAuth.js:** A complete authentication solution for Next.js applications, supporting various authentication providers and secure session management.
-    *   **Uploadthing:** A powerful and easy-to-use file upload service, handling secure and efficient storage of event images and other media.
+Next.js: A React framework for building server-side rendered and statically generated web applications.
 
-## Getting Started
+React: A JavaScript library for building user interfaces.
 
-To set up and run the SEC-NEXUS project on your local machine, please follow these detailed instructions.
+TypeScript: A typed superset of JavaScript that compiles to plain JavaScript.
 
-### Prerequisites
+Tailwind CSS: A utility-first CSS framework for rapid UI development.
 
+Shadcn UI: A collection of re-usable UI components.
+
+Backend & Database:
+
+Next.js API Routes: For building server-side API endpoints.
+
+MongoDB: A NoSQL document database.
+
+Mongoose: An object data modeling (ODM) library for MongoDB and Node.js.
+
+Clerk: For user authentication and management.
+
+Uploadthing: A service for handling file uploads.
+
+Project Structure
+The project follows a standard Next.js App Router structure:
+
+sec-nexus/
+├── app/                  # Core application directory
+│   ├── (auth)/           # Authentication routes (sign-in, sign-up)
+│   ├── (root)/           # Main application routes (home, events, profile)
+│   ├── admin/            # Admin-specific routes
+│   └── api/              # API endpoints for backend logic
+├── components/           # Reusable React components
+│   ├── shared/           # Components used across multiple pages
+│   └── ui/               # Base UI components from Shadcn
+├── lib/                  # Server-side logic, utilities, and database configuration
+│   ├── actions/          # Server Actions for data fetching and mutation
+│   ├── database/         # Mongoose models and connection setup
+│   └── validator.ts      # Zod schemas for form validation
+├── public/               # Static assets (images, icons)
+├── constants.ts          # Application-wide constants
+├── middleware.ts         # Authentication and routing middleware
+└── ...                   # Configuration files
+
+Getting Started
+To set up and run the SEC-NEXUS project on your local machine, please follow these instructions.
+
+Prerequisites
 Ensure you have the following software installed:
 
-*   **Node.js:** Version 18 or higher is recommended. You can download it from [nodejs.org](https://nodejs.org/).
-*   **npm** or **Yarn:** Package managers for Node.js. npm is included with Node.js; Yarn can be installed separately.
-*   **MongoDB Instance:** Access to a MongoDB database. This can be a cloud-hosted solution like [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) (recommended for ease of setup) or a locally installed MongoDB server.
+Node.js: Version 18 or higher.
 
-### Installation Steps
+npm or Yarn.
 
-1.  **Clone the Repository:**
+MongoDB: A local instance or a cloud-hosted solution like MongoDB Atlas.
 
-    Begin by cloning the project repository to your local machine using Git:
+Installation
+Clone the Repository:
 
-    ```bash
-    git clone https://github.com/your-username/SEC-NEXUS.git
-    cd SEC-NEXUS/sec-nexus
-    ```
+git clone [https://github.com/itssambuddha/SEC-NEXUS.git](https://github.com/itssambuddha/SEC-NEXUS.git)
+cd SEC-NEXUS/sec-nexus
 
-2.  **Install Dependencies:**
+Install Dependencies:
 
-    Navigate into the `sec-nexus` directory and install all required project dependencies:
+npm install
+# or
+yarn install
 
-    ```bash
-    npm install
-    # Alternatively, if you prefer Yarn:
-    yarn install
-    ```
+Environment Configuration
+Create a .env.local file in the sec-nexus directory and add the following environment variables:
 
-### Environment Configuration
-
-Create a new file named `.env.local` in the root of the `sec-nexus` directory. Populate this file with your specific environment variables as follows:
-
-```env
+# MongoDB
 MONGODB_URI=your_mongodb_connection_string
-NEXTAUTH_SECRET=your_nextauth_secret
+
+# Clerk
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+
+# Uploadthing
 UPLOADTHING_SECRET=your_uploadthing_secret
 UPLOADTHING_APP_ID=your_uploadthing_app_id
-```
 
-*   `MONGODB_URI`: Your full connection string for the MongoDB database. For MongoDB Atlas, this typically starts with `mongodb+srv://`.
-*   `NEXTAUTH_SECRET`: A strong, randomly generated string crucial for securing NextAuth.js sessions. You can generate a suitable secret using a command like `openssl rand -base64 32` in your terminal.
-*   `UPLOADTHING_SECRET`: Your secret key obtained from your Uploadthing dashboard.
-*   `UPLOADTHING_APP_ID`: Your application ID from your Uploadthing dashboard.
+Running the Application
+Start the development server:
 
-### Running the Application
-
-After configuring your environment variables, you can start the development server:
-
-```bash
 npm run dev
-# Alternatively, if you prefer Yarn:
+# or
 yarn dev
-```
 
-The application will compile and become accessible in your web browser at `http://localhost:3000`.
+The application will be available at http://localhost:3000.
 
-## Usage Guide
+Usage Guide
+Register and Log In: Create an account or sign in to access the platform's features.
 
-Upon launching the application, users can:
+Browse Events: View a list of all events, with filtering options.
 
-*   **Register and Authenticate:** Create a new user account or log in using existing credentials to access personalized features.
-*   **Explore Events:** Browse a comprehensive list of upcoming and past events.
-*   **Filter and Search:** Utilize the advanced filtering options (by category, club, department) and search functionality to quickly find specific events of interest.
-*   **Event Details:** Click on any event to view detailed information, including descriptions, schedules, locations, and associated media.
-*   **Administrator Functions:** Users with administrative privileges can access a dedicated dashboard to approve/reject/delete events.
+Create Events: Authenticated users can create new events through the "Create Event" page.
 
-## Project Structure
+Manage Events: Event creators can edit and delete their events.
 
-The project is organized into a logical and maintainable structure:
+Admin Dashboard: Administrators have access to a dashboard to approve, reject, or delete any event.
 
-```
-sec-nexus/
-├── app/                  # Core Next.js application directory. Contains all routes, pages, and API endpoints.
-│   ├── (auth)/           # Grouped routes for authentication flows (e.g., sign-in, sign-up).
-│   ├── (root)/           # Main application pages and layouts (e.g., homepage, general event listings, user profiles).
-│   ├── admin/            # Dedicated routes and components for the administrative dashboard.
-│   └── api/              # Backend API routes for data interaction (e.g., categories, clubs, events, users).
-├── components/           # Reusable React components to promote modularity and consistency.
-│   ├── shared/           # Common components used across different parts of the application.
-│   └── ui/               # UI components, likely derived from Shadcn UI, providing a consistent design system.
-├── lib/                  # Library of utility functions, database configurations, and server actions.
-│   ├── actions/          # Server-side functions for interacting with the database and performing business logic.
-│   ├── config/           # Application-wide configuration files.
-│   ├── database/         # Database connection setup and Mongoose models for data schemas.
-│   ├── types.ts          # Centralized TypeScript type definitions for the application's data structures.
-│   ├── uploadthing.ts    # Configuration and utilities for the Uploadthing file upload service.
-│   └── utils.ts          # General utility functions and helpers.
-├── public/               # Static assets served directly by Next.js (e.g., images, icons, fonts).
-├── constants.ts          # Global constants and configuration values.
-├── middleware.ts         # Next.js middleware for request processing and authentication checks.
-├── next.config.ts        # Next.js framework configuration file.
-├── package.json          # Defines project metadata, scripts, and dependencies.
-├── tsconfig.json         # TypeScript compiler configuration.
-└── ...                   # Other essential configuration files (e.g., .env.local, .gitignore, postcss.config.mjs).
-```
+Contributing
+Contributions are welcome! If you'd like to contribute, please follow these steps:
 
-## Contributing
+Fork the repository.
 
-I welcome contributions to SEC-NEXUS! If you'd like to contribute, please follow these steps:
+Create a new branch (git checkout -b feature/your-feature-name).
 
-1.  Fork the repository.
-2.  Create a new branch for your feature or bug fix.
-3.  Make your changes and ensure they adhere to the project's coding standards.
-4.  Write clear, concise commit messages.
-5.  Submit a pull request with a detailed description of your changes.
+Make your changes and commit them (git commit -m 'Add some feature').
 
-## License
+Push to the branch (git push origin feature/your-feature-name).
 
-This project is open-source and licensed under the [MIT License](https://opensource.org/licenses/MIT). See the `LICENSE` file in the root directory of the repository for the full license text.
+Open a Pull Request.
+
+License
+This project is licensed under the MIT License. See the LICENSE file for details.
