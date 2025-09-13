@@ -1,4 +1,4 @@
-# SEC-NEXUS: Complete Project Documentation
+# SEC-NEXUS: The Event Manager for St. Edmund's College
 
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
