@@ -18,6 +18,7 @@ import {
 } from "../types";
 import Department from "../database/models/department.model";
 import Club from "../database/models/club.model";
+import { HARD_CODED_ADMIN } from "../config/admin";
 
 import { QueryWithHelpers, HydratedDocument, Query } from 'mongoose';
 import { IEvent } from "../database/models/event.model";
@@ -155,25 +156,46 @@ export async function updateEvent({ userId, event, path }: UpdateEventParams) {
     try {
         await connectToDatabase();
 
-        const user = await User.findOne({ clerkId: userId });
-
-        if (!user) {
-            throw new Error("User not found");
-        }
-
         const eventToUpdate = await Event.findById(event._id);
-        if (!eventToUpdate || eventToUpdate.organizer.toHexString() !== user._id.toHexString()) {
-            throw new Error("Unauthorized or event not found");
+        if (!eventToUpdate) {
+            throw new Error("Event not found");
         }
 
-        const updatedEvent = await Event.findByIdAndUpdate(
-            event._id,
-            { ...event, category: event.categoryId, department: event.departmentId || undefined, club: event.clubId || undefined, isCR: event.isCR || "no" },
-            { new: true }
-        );
-        revalidatePath(path);
+        const isAdmin = userId === HARD_CODED_ADMIN.clerkId;
 
-        return JSON.parse(JSON.stringify(updatedEvent));
+        if (isAdmin) {
+            // Admin can only update status
+            if (event.status && event.status !== eventToUpdate.status) {
+                const updatedEvent = await Event.findByIdAndUpdate(
+                    event._id,
+                    { status: event.status },
+                    { new: true }
+                );
+                revalidatePath(path);
+                return JSON.parse(JSON.stringify(updatedEvent));
+            } else {
+                throw new Error("Admin can only update event status");
+            }
+        } else {
+            // Non-admin: must be the organizer and in database
+            const user = await User.findOne({ clerkId: userId });
+            if (!user) {
+                throw new Error("User not found");
+            }
+
+            const isOrganizer = eventToUpdate.organizer.toHexString() === user._id.toHexString();
+            if (!isOrganizer) {
+                throw new Error("Unauthorized");
+            }
+
+            const updatedEvent = await Event.findByIdAndUpdate(
+                event._id,
+                { ...event, category: event.categoryId, department: event.departmentId || undefined, club: event.clubId || undefined, isCR: event.isCR || "no" },
+                { new: true }
+            );
+            revalidatePath(path);
+            return JSON.parse(JSON.stringify(updatedEvent));
+        }
     } catch (error) {
         handleError(error);
     }
