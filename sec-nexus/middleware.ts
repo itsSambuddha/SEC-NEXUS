@@ -7,7 +7,6 @@ const isPublicRoute = createRouteMatcher([
   '/events',
   "/sign-in(.*)",
   "/sign-up(.*)",
-  "/api/users-sync",
   '/api/uploadthing'
 ]);
 

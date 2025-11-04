@@ -110,7 +110,7 @@ const EventForm = ({ type, event, eventId }: EventFormProps) => {
       if (files.length > 0) {
         const uploadedImages = await startUpload(files)
         if (uploadedImages && uploadedImages[0]) {
-          uploadedImageUrl = uploadedImages[0].url
+          uploadedImageUrl = uploadedImages[0].ufsUrl
         } else {
           alert("Image upload failed. Please try again.")
           return

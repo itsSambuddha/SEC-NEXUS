@@ -1,4 +1,4 @@
-import { currentUser } from "@clerk/nextjs/server";
+import { currentUser, auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/database";
 import User from "@/lib/database/models/user.model";

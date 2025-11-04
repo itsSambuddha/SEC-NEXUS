@@ -56,6 +56,8 @@ export const createEvent = async ({
             ...event,
             category: event.categoryId,
             organizer: organizer._id,
+            department: event.departmentId || undefined,
+            club: event.clubId || undefined,
         });
 
         revalidatePath(path);
@@ -164,7 +166,7 @@ export async function updateEvent({ userId, event, path }: UpdateEventParams) {
 
         const updatedEvent = await Event.findByIdAndUpdate(
             event._id,
-            { ...event, category: event.categoryId },
+            { ...event, category: event.categoryId, department: event.departmentId || undefined, club: event.clubId || undefined },
             { new: true }
         );
         revalidatePath(path);
