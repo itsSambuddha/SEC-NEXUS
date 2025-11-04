@@ -20,7 +20,7 @@ export const eventFormSchema = z.object({
     message: "URL must be a valid URL or empty"
   }),
   status:z.enum(["pending", "approved", "rejected"]),
-  isCR:z.boolean()
+  isCR:z.enum(["yes", "no"])
 }).refine((data) => {
   // Can't fill both department and club fields
   if (data.departmentId && data.clubId) {
@@ -31,7 +31,7 @@ export const eventFormSchema = z.object({
   message: "Cannot select both Department and Club. Please choose only one.",
   path: ["departmentId"] // This will show the error on departmentId field
 }).refine((data) => {
-  // If department is selected, CR boolean is necessary
+  // If department is selected, CR status is necessary
   if (data.departmentId && !data.isCR) {
     return false;
   }

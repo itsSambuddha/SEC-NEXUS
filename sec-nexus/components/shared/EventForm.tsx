@@ -244,15 +244,27 @@ const EventForm = ({ type, event, eventId }: EventFormProps) => {
                 <FormItem className="w-full">
                   <h3 className="mt-5">Are you the CR registering for the event?</h3>
                   <FormControl>
-                    <div className="flex items-center">
-                      <input
-                        type="checkbox"
-                        onChange={(e) => field.onChange(e.target.checked)}
-                        checked={field.value}
-                        id="isCR"
-                        className="mr-2"
-                      />
-                      <label htmlFor="isCR" className="text-sm">Yes, I am the CR</label>
+                    <div className="flex flex-col space-y-2">
+                      <label className="flex items-center">
+                        <input
+                          type="radio"
+                          value="yes"
+                          checked={field.value === "yes"}
+                          onChange={() => field.onChange("yes")}
+                          className="mr-2"
+                        />
+                        Yes, I am the CR
+                      </label>
+                      <label className="flex items-center">
+                        <input
+                          type="radio"
+                          value="no"
+                          checked={field.value === "no"}
+                          onChange={() => field.onChange("no")}
+                          className="mr-2"
+                        />
+                        No, I am not the CR
+                      </label>
                     </div>
                   </FormControl>
                   <FormMessage />

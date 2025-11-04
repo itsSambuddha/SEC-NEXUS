@@ -16,7 +16,7 @@ export interface IEvent extends Document {
   department?: Schema.Types.ObjectId; // Ref to Department
   club?: Schema.Types.ObjectId; // Ref to Club
   clubRole?: string;
-  isCR: boolean;
+  isCR: "yes" | "no";
 }
 
 const EventSchema = new Schema({
@@ -34,7 +34,7 @@ const EventSchema = new Schema({
     club: { type: Schema.Types.ObjectId, ref: 'Club' },
     clubRole: { type: String },
     status: { type: String, default: "pending", enum: ["pending", "approved", "rejected"] },
-    isCR: { type: Boolean, default: false }
+    isCR: { type: String, enum: ["yes", "no"], default: "no" }
 });
 
 

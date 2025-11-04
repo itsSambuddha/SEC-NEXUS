@@ -33,5 +33,5 @@ export const eventDefaultValues = {
     clubRole: "",
     url: "",
     status: "pending",
-    isCR: false
+    isCR: "no"
   } as const

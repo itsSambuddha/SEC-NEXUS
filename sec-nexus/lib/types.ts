@@ -29,6 +29,8 @@ export type CreateEventParams = {
     departmentId?: string
     clubId?: string
     clubRole?: string
+    status?: 'pending' | 'approved' | 'rejected'
+    isCR?: 'yes' | 'no'
   }
   path: string
 }
@@ -49,6 +51,7 @@ export type UpdateEventParams = {
     clubId?: string
     clubRole?: string
     status?: 'pending' | 'approved' | 'rejected'
+    isCR?: 'yes' | 'no'
   }
   path: string
 }
@@ -125,7 +128,7 @@ export type Event = {
   }
   clubRole?: string
   status: 'pending' | 'approved' | 'rejected'
-  isCR: boolean
+  isCR: 'yes' | 'no'
 }
 
 // ====== CATEGORY PARAMS
